@@ -32,3 +32,11 @@ describe 'Tokenizer', ->
         console.log nouns
         assert.deepEqual nouns, ['すもも','もも','うち']
         done()
+
+    it 'should returns joined nouns', (done) ->
+      tokenizer.build()
+      .then (tokenizer) ->
+        nouns = tokenizer.getNouns 'hubot、なんかメモリリークしてる。'
+        console.log nouns
+        assert.deepEqual nouns, ['hubot','メモリ','リーク','メモリリーク']
+        done()

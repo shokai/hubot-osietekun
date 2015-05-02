@@ -7,6 +7,8 @@ _       = require 'lodash'
 kuromoji = require 'kuromoji'
 DIC_PATH = path.join(__dirname,'../node_modules/kuromoji/dist/dict')+'/'
 
+IGNORE_WORDS = [ '、' ]
+
 _tokenizer = null
 
 module.exports =
@@ -24,13 +26,23 @@ module.exports =
           tokenizer.tokenize text
 
         tokenizer.getNouns = (text) ->
-          _.chain tokenizer.getTokens(text)
-          .select (i) ->
-            /名詞/.test i.pos
-          .map (i) ->
-            i.surface_form
-          .uniq()
-          .value()
+          nouns = tokenizer.getTokens(text)
+            .map (i) ->
+              if /名詞/.test(i.pos) and IGNORE_WORDS.indexOf(i.surface_form) < 0
+                i.surface_form
+              else
+                null
+
+          joined_nouns = nouns
+            .map (i) ->
+              if typeof i is 'string' then i else ' '
+            .join ''
+            .match(/([^\s])+/g) or []
+
+          nouns = _.select nouns, (i) -> typeof i is 'string'
+          nouns = nouns.concat joined_nouns if joined_nouns?.length > 0
+
+          return _.uniq nouns
 
         _tokenizer = tokenizer
         return resolve tokenizer
