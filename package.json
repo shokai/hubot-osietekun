@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/shokai/hubot-osietekun",
   "dependencies": {
+    "bluebird": "*",
     "debug": "*",
-    "lodash": "^3.8.0"
+    "kuromoji": "0.0.2",
+    "lodash": "*"
   },
   "devDependencies": {
     "coffee-errors": "*",
