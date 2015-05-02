@@ -29,6 +29,7 @@ describe 'Tokenizer', ->
     it 'should returns nouns', (done) ->
       tokenizer.build()
       .then (tokenizer) ->
-        nouns = tokenizer.getNouns "合宿参加者各位\n宿泊しない日やご飯いらない時あったら連絡ください"
+        nouns = tokenizer.getNouns "すもももももももものうち"
         console.log nouns
+        assert.deepEqual nouns, ['すもも','もも','うち']
         done()

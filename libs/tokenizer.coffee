@@ -29,6 +29,7 @@ module.exports =
             /名詞/.test i.pos
           .map (i) ->
             i.surface_form
+          .uniq()
           .value()
 
         _tokenizer = tokenizer
