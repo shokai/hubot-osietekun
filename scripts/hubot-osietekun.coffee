@@ -23,7 +23,7 @@ module.exports = (robot) ->
 
     getCounts = (word) ->
       word = word.toLowerCase()
-      counts = robot.brain.get("osiete_word_#{word}")
+      counts = robot.brain.get "osiete_word_#{word}"
       return {} unless counts
       try
         JSON.parse counts
@@ -36,6 +36,7 @@ module.exports = (robot) ->
 
     register = (who, text) ->
       nouns = tokenizer.getNouns text
+      return if nouns.length < 1
       debug "register #{JSON.stringify nouns} - @#{who}"
       for noun in nouns
         counts = getCounts noun
