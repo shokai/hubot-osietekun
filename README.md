@@ -1,10 +1,12 @@
-# Hubot Oisietekun
-
+Hubot Oisietekun
+================
 詳しい人を教えてくれるhubot script
 
 ![design](https://i.gyazo.com/d0f9aff007a7603760639df0192c5624.png)
 
-## Install
+
+Install
+-------
 
     % npm i shokai/hubot-osietekun -save
 
@@ -14,11 +16,21 @@
 ["hubot-osietekun"]
 ```
 
-## Requirements
+
+Requirements
+------------
 
 - coffee-script 1.8+
 - hubot-brain
   - recommend [brain-redis-hash](https://www.npmjs.com/package/hubot-brain-redis-hash). normal redis-brain is not good.
+
+
+Usage
+-----
+
+### 教わる
+
+    % hubot 教えて react
 
 
 ## Test
