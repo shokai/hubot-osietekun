@@ -9,7 +9,10 @@ DIC_PATH = path.join(__dirname,'../node_modules/kuromoji/dist/dict')+'/'
 
 IGNORE_WORDS = [
   '、'
-  /https?:\/\/[^\s]+/ig
+]
+
+IGNORE_PATTERNS = [
+  /(ftp|https?):\/\/[^\s]+/ig
 ]
 
 _tokenizer = null
@@ -29,17 +32,12 @@ module.exports =
           tokenizer.tokenize text
 
         tokenizer.getNouns = (text) ->
-          for word in IGNORE_WORDS
-            reg =
-              if word instanceof RegExp
-                word
-              else
-                new RegExp word, 'ig'
-            text = text.replace reg, ' '
+          for regex in IGNORE_PATTERNS
+            text = text.replace regex, ' '
 
           nouns = tokenizer.getTokens text
             .map (i) ->
-              if /名詞/.test i.pos
+              if /名詞/.test(i.pos) and IGNORE_WORDS.indexOf(i.surface_form) < 0
                 i.surface_form
               else
                 null
