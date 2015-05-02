@@ -7,10 +7,12 @@
 # Author:
 #   @shokai
 
-path = require 'path'
+'use strict'
 
-debug = require('debug')('hubot:osietekun')
-_     = require 'lodash'
+path    = require 'path'
+Promise = require 'bluebird'
+debug   = require('debug')('hubot:osietekun')
+_       = require 'lodash'
 
 tokenizer = require path.join __dirname, '../libs/tokenizer'
 
