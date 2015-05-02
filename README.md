@@ -6,6 +6,9 @@ Hubot Oisietekun
 
 - https://github.com/shokai/hubot-osietekun
 
+[![Build Status](https://travis-ci.org/shokai/hubot-osietekun.svg?branch=travis_ci)](https://travis-ci.org/shokai/hubot-osietekun)
+
+
 Install
 -------
 
