@@ -2,7 +2,7 @@
 #   Hubot Osietekun
 #
 # Commands:
-#   hubot 教えて (keyword)
+#   hubot 教えて [word]
 #
 # Author:
 #   @shokai
