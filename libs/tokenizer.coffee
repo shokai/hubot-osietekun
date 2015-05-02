@@ -7,7 +7,10 @@ _       = require 'lodash'
 kuromoji = require 'kuromoji'
 DIC_PATH = path.join(__dirname,'../node_modules/kuromoji/dist/dict')+'/'
 
-IGNORE_WORDS = [ '、' ]
+IGNORE_WORDS = [
+  '、'
+  /https?:\/\/[^\s]+/ig
+]
 
 _tokenizer = null
 
@@ -26,9 +29,17 @@ module.exports =
           tokenizer.tokenize text
 
         tokenizer.getNouns = (text) ->
-          nouns = tokenizer.getTokens(text)
+          for word in IGNORE_WORDS
+            reg =
+              if word instanceof RegExp
+                word
+              else
+                new RegExp word, 'ig'
+            text = text.replace reg, ' '
+
+          nouns = tokenizer.getTokens text
             .map (i) ->
-              if /名詞/.test(i.pos) and IGNORE_WORDS.indexOf(i.surface_form) < 0
+              if /名詞/.test i.pos
                 i.surface_form
               else
                 null

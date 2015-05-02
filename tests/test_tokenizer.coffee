@@ -40,3 +40,11 @@ describe 'Tokenizer', ->
         console.log nouns
         assert.deepEqual nouns, ['hubot','メモリ','リーク','メモリリーク']
         done()
+
+    it 'should register URL', (done) ->
+      tokenizer.build()
+      .then (tokenizer) ->
+        nouns = tokenizer.getNouns 'ここから https://www.npmjs.com/package/hubot-osietekun インストールできる'
+        console.log nouns
+        assert.deepEqual nouns, ['ここ','インストール']
+        done()
