@@ -21,7 +21,7 @@ module.exports = (robot) ->
   debug 'loading tokenizer..'
   tokenizer.build()
   .then (tokenizer) ->
-    debug 'done!'
+    debug 'start'
 
     getCounts = (word) ->
       word = word.toLowerCase()
