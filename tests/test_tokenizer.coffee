@@ -1,8 +1,8 @@
 path = require 'path'
 require path.resolve 'tests', 'test_helper'
 
-assert     = require 'assert'
-tokenizer  = require path.resolve 'libs', 'tokenizer'
+assert    = require 'assert'
+tokenizer = require path.resolve 'libs', 'tokenizer'
 
 describe 'Tokenizer', ->
 
