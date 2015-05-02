@@ -25,7 +25,7 @@ module.exports =
 
         tokenizer.getNouns = (text) ->
           _.chain tokenizer.getTokens(text)
-          .filter (i) ->
+          .select (i) ->
             /名詞/.test i.pos
           .map (i) ->
             i.surface_form
