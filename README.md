@@ -2,11 +2,11 @@ Hubot Oisietekun
 ================
 詳しい人を教えてくれるhubot script
 
-![screen shot](https://i.gyazo.com/0fd0401ce5fdc78725a9076eb630ad66.png)
-
 - https://github.com/shokai/hubot-osietekun
 
 [![Build Status](https://travis-ci.org/shokai/hubot-osietekun.svg?branch=travis_ci)](https://travis-ci.org/shokai/hubot-osietekun)
+
+![screen shot](https://i.gyazo.com/0fd0401ce5fdc78725a9076eb630ad66.png)
 
 
 Install
