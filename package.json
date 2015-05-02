@@ -1,6 +1,6 @@
 {
   "name": "hubot-osietekun",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "教えて君",
   "main": "scripts/hubot-osietekun.coffee",
   "scripts": {
