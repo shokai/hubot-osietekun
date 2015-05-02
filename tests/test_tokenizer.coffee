@@ -20,7 +20,6 @@ describe 'Tokenizer', ->
       tokenizer.build()
       .then (tokenizer) ->
         tokens = tokenizer.getTokens "kuromoji、最初から辞書が内蔵されてるからrequireしてすぐ使えて凄い"
-        console.log tokens.length
         assert.equal true, tokens instanceof Array
         done()
 
