@@ -14,7 +14,7 @@ Hubot Oisietekun
 Install
 -------
 
-    % npm i shokai/hubot-osietekun -save
+    % npm i hubot-osietekun -save
 
 ### edit `external-script.json`
 
