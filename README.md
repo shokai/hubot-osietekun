@@ -8,8 +8,21 @@
 
     % npm i shokai/hubot-osietekun -save
 
+### edit `external-script.json`
+
+```json
+["hubot-osietekun"]
+```
+
 ## Requirements
 
+- coffee-script 1.8+
 - hubot-brain
   - recommend [brain-redis-hash](https://www.npmjs.com/package/hubot-brain-redis-hash). normal redis-brain is not good.
 
+
+## Test
+
+    % npm test
+    # or
+    % npm run watch

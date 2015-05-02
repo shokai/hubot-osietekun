@@ -1,0 +1,39 @@
+{
+  "name": "hubot-osietekun",
+  "version": "0.0.1",
+  "description": "教えて君",
+  "main": "scripts/hubot-osietekun.coffee",
+  "scripts": {
+    "watch": "grunt",
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shokai/hubot-osietekun.git"
+  },
+  "keywords": [
+    "hubot"
+  ],
+  "author": "Sho Hashimoto <hashimoto@shokai.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shokai/hubot-osietekun/issues"
+  },
+  "homepage": "https://github.com/shokai/hubot-osietekun",
+  "dependencies": {
+    "debug": "*",
+    "lodash": "^3.8.0"
+  },
+  "devDependencies": {
+    "coffee-errors": "*",
+    "coffee-script": "^1.9",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-coffeelint": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-notify": "*",
+    "grunt-simple-mocha": "*",
+    "hubot": "^2.12.0",
+    "mocha": "*"
+  }
+}
