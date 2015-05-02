@@ -2,8 +2,9 @@ Hubot Oisietekun
 ================
 詳しい人を教えてくれるhubot script
 
-![design](https://i.gyazo.com/d0f9aff007a7603760639df0192c5624.png)
+![screen shot](https://i.gyazo.com/0fd0401ce5fdc78725a9076eb630ad66.png)
 
+- https://github.com/shokai/hubot-osietekun
 
 Install
 -------
