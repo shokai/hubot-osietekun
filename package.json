@@ -23,7 +23,8 @@
   "dependencies": {
     "bluebird": "*",
     "debug": "*",
-    "kuromoji": "0.0.2",
+    "eventemitter2": "*",
+    "kuromoji": "*",
     "lodash": "*"
   },
   "devDependencies": {

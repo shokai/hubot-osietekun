@@ -39,7 +39,21 @@ Usage
     % hubot 教えて react
 
 
-## Test
+Extend
+------
+
+hook "osietekun:ready" and "response" event.
+
+```coffee
+robot.on 'osietekun:ready', (osietekun) ->
+
+  osietekun.on 'response' (msg, res) ->
+    if res.masters.length < 1
+      msg.send "#{res.word}については http://your-great-wiki-site.com/#{res.word} を見るといいかも"
+```
+
+Test
+----
 
     % npm test
     # or

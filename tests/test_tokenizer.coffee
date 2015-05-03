@@ -2,14 +2,14 @@ path = require 'path'
 require path.resolve 'tests', 'test_helper'
 
 assert    = require 'assert'
-tokenizer = require path.resolve 'libs', 'tokenizer'
+Tokenizer = require path.resolve 'libs', 'tokenizer'
 
-describe 'Tokenizer', ->
+describe 'tokenizer', ->
 
   it 'sohuld have methods "getTokens", "getNouns"', (done) ->
     @timeout 5000
 
-    tokenizer.build().then (tokenizer) ->
+    Tokenizer.build().then (tokenizer) ->
       assert.equal typeof tokenizer['getTokens'], 'function'
       assert.equal typeof tokenizer['getNouns'], 'function'
       done()
@@ -17,7 +17,7 @@ describe 'Tokenizer', ->
   describe 'method "getToken"', ->
 
     it 'should returns tokens', (done) ->
-      tokenizer.build()
+      Tokenizer.build()
       .then (tokenizer) ->
         tokens = tokenizer.getTokens "kuromoji、最初から辞書が内蔵されてるからrequireしてすぐ使えて凄い"
         assert.equal true, tokens instanceof Array
@@ -26,7 +26,7 @@ describe 'Tokenizer', ->
   describe 'method "getNouns"', ->
 
     it 'should returns nouns', (done) ->
-      tokenizer.build()
+      Tokenizer.build()
       .then (tokenizer) ->
         nouns = tokenizer.getNouns "すもももももももものうち"
         console.log nouns
@@ -34,7 +34,7 @@ describe 'Tokenizer', ->
         done()
 
     it 'should returns joined nouns', (done) ->
-      tokenizer.build()
+      Tokenizer.build()
       .then (tokenizer) ->
         nouns = tokenizer.getNouns 'hubot、なんかメモリリークしてる。'
         console.log nouns
@@ -42,7 +42,7 @@ describe 'Tokenizer', ->
         done()
 
     it 'should register URL', (done) ->
-      tokenizer.build()
+      Tokenizer.build()
       .then (tokenizer) ->
         nouns = tokenizer.getNouns 'ここから https://www.npmjs.com/package/hubot-osietekun インストールできる'
         console.log nouns
