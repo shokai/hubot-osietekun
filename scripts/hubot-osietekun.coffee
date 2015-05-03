@@ -14,37 +14,12 @@ Promise = require 'bluebird'
 debug   = require('debug')('hubot:osietekun')
 _       = require 'lodash'
 
-tokenizer = require path.join __dirname, '../libs/tokenizer'
+Osietekun = require path.join __dirname, '../libs/osietekun'
 
 module.exports = (robot) ->
 
-  debug 'loading tokenizer..'
-  tokenizer.build()
-  .then (tokenizer) ->
-    debug 'start'
-
-    getCounts = (word) ->
-      word = word.toLowerCase()
-      counts = robot.brain.get "osiete_word_#{word}"
-      return {} unless counts
-      try
-        JSON.parse counts
-      catch
-        {}
-
-    setCounts = (word, counts) ->
-      word = word.toLowerCase()
-      robot.brain.set "osiete_word_#{word}", JSON.stringify(counts)
-
-    register = (who, text) ->
-      nouns = tokenizer.getNouns text
-      return if nouns.length < 1
-      debug "register #{JSON.stringify nouns} - @#{who}"
-      for noun in nouns
-        counts = getCounts noun
-        counts[who] ||= 0
-        counts[who] += 1
-        setCounts noun, counts
+  new Osietekun robot
+  .then (osietekun) ->
 
     robot.hear /^(.+)$/, (msg) ->
       who  = msg.message.user.name
@@ -52,11 +27,11 @@ module.exports = (robot) ->
       if new RegExp("^#{robot.name} 教えて", 'i').test text
         return
       debug text
-      register who, text
+      osietekun.register who, text
 
     robot.respond /教えて ([^\s]+)$/i, (msg) ->
       word = msg.match[1]
-      counts = getCounts word
+      counts = osietekun.getCounts word
 
       if Object.keys(counts).length < 1
         msg.send "「#{word}」に詳しい人はいないみたいです"
@@ -81,6 +56,8 @@ module.exports = (robot) ->
       text += " が詳しいので教えてもらって下さい"
 
       msg.send text
+
+    robot.emit 'osietekun:ready', osietekun
 
   .catch (err) ->
     if err
