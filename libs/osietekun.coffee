@@ -5,7 +5,9 @@ debug     = require('debug')('hubot:osietekun:core')
 _         = require 'lodash'
 Tokenizer = require path.join __dirname, 'tokenizer'
 
-module.exports = class Osietekun
+{EventEmitter2} = require 'eventemitter2'
+
+module.exports = class Osietekun extends EventEmitter2
 
   constructor: (@robot) ->
     return new Promise (resolve, reject) =>
@@ -14,7 +16,6 @@ module.exports = class Osietekun
       .then (@tokenizer) =>
         debug 'ready'
         resolve @
-
 
   getCounts: (word) ->
     word = word.toLowerCase()
@@ -38,5 +39,3 @@ module.exports = class Osietekun
       counts[who] ||= 0
       counts[who] += 1
       @setCounts noun, counts
-
-

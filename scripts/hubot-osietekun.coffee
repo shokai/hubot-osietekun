@@ -35,6 +35,10 @@ module.exports = (robot) ->
 
       if Object.keys(counts).length < 1
         msg.send "「#{word}」に詳しい人はいないみたいです"
+        osietekun.emit 'response', msg,
+          word: word
+          counts: counts
+          masters: []
         return
 
       masters = _.chain counts
@@ -56,6 +60,13 @@ module.exports = (robot) ->
       text += " が詳しいので教えてもらって下さい"
 
       msg.send text
+
+      osietekun.emit 'response', msg,
+        word: word
+        text: text
+        counts: counts
+        masters: masters
+      return
 
     robot.emit 'osietekun:ready', osietekun
 
