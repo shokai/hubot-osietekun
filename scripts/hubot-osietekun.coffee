@@ -59,7 +59,7 @@ module.exports = (robot) ->
       counts = getCounts word
 
       if Object.keys(counts).length < 1
-        msg.send "#{word}に詳しい人はいないみたいです"
+        msg.send "「#{word}」に詳しい人はいないみたいです"
         return
 
       masters = _.chain counts
@@ -71,10 +71,12 @@ module.exports = (robot) ->
         .map (i) ->
           i[0]
 
-      text = "#{word}については "
+      text = "「#{word}」については "
       text += masters
         .map (master) ->
-          "@#{master}"
+          switch robot.adapter
+            when 'slack' then "@#{master}:"
+            else "@#{master}:"
         .join ' '
       text += " が詳しいので教えてもらって下さい"
 
