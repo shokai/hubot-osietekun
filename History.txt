@@ -1,3 +1,8 @@
+=== 0.1.0 2015-05-03
+
+* extend response  #3
+ - emit "response" event for hook
+
 === 0.0.4 2015-05-03
 
 * fixed ignore URL and words
