@@ -49,7 +49,8 @@ robot.on 'osietekun:ready', (osietekun) ->
 
   osietekun.on 'response' (msg, res) ->
     if res.masters.length < 1
-      msg.send "#{res.word}については http://your-great-wiki-site.com/#{res.word} を見るといいかも"
+      for word in res.words
+        msg.send "#{word}については http://your-great-wiki-site.com/#{word} を見るといいかも"
 ```
 
 Test
