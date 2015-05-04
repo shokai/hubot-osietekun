@@ -29,29 +29,20 @@ module.exports = (robot) ->
       debug text
       osietekun.register who, text
 
-    robot.respond /教えて ([^\s]+)$/i, (msg) ->
-      word = msg.match[1]
-      counts = osietekun.getCounts word
+    robot.respond /教えて\s+(.+)$/i, (msg) ->
+      words = msg.match[1].split(/\s+/)
+      res = osietekun.suggest words
+      words_str = words
+        .map (word) -> "「#{word}」"
+        .join ''
 
-      if Object.keys(counts).length < 1
-        msg.send "「#{word}」に詳しい人はいないみたいです"
-        osietekun.emit 'response', msg,
-          word: word
-          counts: counts
-          masters: []
+      if Object.keys(res.masters).length < 1
+        msg.send "#{words_str}に詳しい人はいないみたいです"
+        osietekun.emit 'response', msg, res
         return
 
-      masters = _.chain counts
-        .pairs()
-        .sort (a,b) ->
-          a[1] < b[1]
-        .value()
-        .splice 0,3
-        .map (i) ->
-          i[0]
-
-      text = "「#{word}」については "
-      text += masters
+      text = "#{words_str}については "
+      text += res.masters
         .map (master) ->
           switch robot.adapter
             when 'slack' then "@#{master}:"
@@ -61,11 +52,7 @@ module.exports = (robot) ->
 
       msg.send text
 
-      osietekun.emit 'response', msg,
-        word: word
-        text: text
-        counts: counts
-        masters: masters
+      osietekun.emit 'response', msg, res
       return
 
     robot.emit 'osietekun:ready', osietekun

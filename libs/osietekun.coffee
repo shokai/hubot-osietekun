@@ -1,4 +1,3 @@
-
 path      = require 'path'
 Promise   = require 'bluebird'
 debug     = require('debug')('hubot:osietekun:core')
@@ -39,3 +38,32 @@ module.exports = class Osietekun extends EventEmitter2
       counts[who] ||= 0
       counts[who] += 1
       @setCounts noun, counts
+
+  suggest: (words) ->
+    unless words instanceof Array
+      @robot.logger.error "argument must be Array"
+      return
+    counts = words
+      .map (word) =>
+        @getCounts word
+      .reduce (a,b) ->
+        for name, count of a
+          a[name] *= (b[name] or 0)
+        return a
+
+    masters = _.chain counts
+      .pairs()
+      .select (i) ->
+        i[1] > 0
+      .sort (a,b) ->
+        a[1] < b[1]
+      .value()
+      .splice 0,3
+      .map (i) ->
+        i[0]
+
+    return {
+      words: words
+      masters: masters
+      counts: counts
+    }
