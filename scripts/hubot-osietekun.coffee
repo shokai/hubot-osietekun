@@ -49,10 +49,30 @@ module.exports = (robot) ->
             else "@#{master}:"
         .join ' '
       text += " が詳しいので教えてもらって下さい"
+      if res.teachers.length > 0
+        text += "\nあと、"
+        text += res.teachers
+          .map (teacher) -> "@#{teacher}"
+          .join ' '
+        text += "は#{words_str}について教えたいと言っていました"
 
       msg.send text
 
       osietekun.emit 'response', msg, res
+      return
+
+    robot.respond /教えます\s+([^\s]+)$/i, (msg) ->
+      who  = msg.message.user.name
+      word = msg.match[1]
+      osietekun.registerTeacher who, word
+      msg.send "へえ、@#{who} は「#{word}」に詳しいんだ"
+      return
+
+    robot.respond /教えません\s+([^\s]+)$/i, (msg) ->
+      who  = msg.message.user.name
+      word = msg.match[1]
+      osietekun.unregisterTeacher who, word
+      msg.send "@#{who} は「#{word}」を教えたくないらしい"
       return
 
     robot.emit 'osietekun:ready', osietekun
