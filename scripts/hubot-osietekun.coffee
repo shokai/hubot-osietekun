@@ -3,6 +3,8 @@
 #
 # Commands:
 #   hubot 教えて [word]
+#   hubot 教えます [word]
+#   hubot 教えません [word]
 #
 # Author:
 #   @shokai
