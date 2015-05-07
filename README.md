@@ -55,6 +55,9 @@ robot.on 'osietekun:ready', (osietekun) ->
     if res.masters.length < 1
       for word in res.words
         msg.send "#{word}については http://your-great-wiki-site.com/#{word} を見るといいかも"
+
+  osietekun.on 'register:teacher', (msg, query) ->
+    msg.send "http://your-great-wiki-site.com/#{query.word} に書いてもいいんだよ"
 ```
 
 Test

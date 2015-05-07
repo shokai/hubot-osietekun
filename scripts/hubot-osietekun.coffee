@@ -65,6 +65,8 @@ module.exports = (robot) ->
       word = msg.match[1]
       osietekun.registerTeacher who, word
       msg.send "へえ、@#{who} は「#{word}」に詳しいんだ"
+
+      osietekun.emit 'register:teacher', msg, {who: who, word: word}
       return
 
     robot.respond /教えません\s+([^\s]+)$/i, (msg) ->
@@ -72,6 +74,7 @@ module.exports = (robot) ->
       word = msg.match[1]
       osietekun.unregisterTeacher who, word
       msg.send "@#{who} は「#{word}」を教えたくないらしい"
+      osietekun.emit 'unregister:teacher', msg, {who: who, word: word}
       return
 
     robot.emit 'osietekun:ready', osietekun
