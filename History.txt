@@ -1,3 +1,10 @@
+=== 0.3.1 2015-05-07
+
+* little fixes
+ - tokenizer tests
+ - reply message format
+ - in script document
+
 === 0.3.0 2015-05-07
 
 * added 「教えます」「教えません」command  #8
