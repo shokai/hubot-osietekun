@@ -38,6 +38,10 @@ Usage
 
     % hubot 教えて react
 
+### 教える
+
+    % hubot 教えます ruby
+    % hubot 教えません php
 
 Extend
 ------

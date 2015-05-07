@@ -62,8 +62,40 @@ module.exports = class Osietekun extends EventEmitter2
       .map (i) ->
         i[0]
 
+    teachers = words
+      .map (word) =>
+        @getTeachers word
+      .reduce (a, b) ->
+        _.reject a, (teacher) -> b.indexOf(teacher) < 0
+
     return {
       words: words
       masters: masters
       counts: counts
+      teachers: teachers
     }
+
+  getTeachers: (word) ->
+    word = word.toLowerCase()
+    teachers = @robot.brain.get "osieru_word_#{word}"
+    return [] unless teachers
+    try
+      JSON.parse teachers
+    catch
+      []
+
+  setTeachers: (word, teachers) ->
+    word = word.toLowerCase()
+    @robot.brain.set "osieru_word_#{word}", JSON.stringify(teachers)
+
+  registerTeacher: (who, word) ->
+    debug "registerTeacher @#{who}, #{word}"
+    teachers = @getTeachers word
+    teachers.push who
+    teachers = _.uniq teachers
+    @setTeachers word, teachers
+
+  unregisterTeacher: (who, word) ->
+    teachers = @getTeachers word
+    teachers = _.reject teachers, (i) -> i is who
+    @setTeachers word, teachers
