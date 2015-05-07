@@ -45,10 +45,7 @@ module.exports = (robot) ->
 
       text = "#{words_str}については "
       text += res.masters
-        .map (master) ->
-          switch robot.adapter
-            when 'slack' then "@#{master}:"
-            else "@#{master}:"
+        .map (master) -> "@#{master}"
         .join ' '
       text += " が詳しいので教えてもらって下さい"
       if res.teachers.length > 0
