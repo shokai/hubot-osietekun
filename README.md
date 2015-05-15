@@ -51,7 +51,7 @@ hook "osietekun:ready" and "response" event.
 ```coffee
 robot.on 'osietekun:ready', (osietekun) ->
 
-  osietekun.on 'response' (msg, res) ->
+  osietekun.on 'response', (msg, res) ->
     if res.masters.length < 1
       for word in res.words
         msg.send "#{word}については http://your-great-wiki-site.com/#{word} を見るといいかも"
